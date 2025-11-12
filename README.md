@@ -4,6 +4,9 @@
 
 The **Keep Screen On** Plugin is an extension for [Grav CMS](https://github.com/getgrav/grav). This plugin is to keep screen on for users who may be busy while doing things they read on page or for some other reason like cooking and want not to leave page.
 
+- [Secure context: This feature is available only in secure contexts (HTTPS), in some or all supporting browsers.](https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API)
+
+
 ## Installation
 
 ### Manual Installation
@@ -23,6 +26,7 @@ Those can be edited to change default settings of the button.
 
 Note that if you use the Admin Plugin, a file with your configuration named keep-screen-on.yaml will be saved in the `user/config/plugins/`-folder once the configuration is saved in the Admin.
 
+
 ## Usage
 [keep-screen-on] shortcode can be added to content section in pages on admin plugin or to md file to show the button which works for switching modes.
 
@@ -30,6 +34,9 @@ Note that if you use the Admin Plugin, a file with your configuration named keep
 ## Credits
 
 I like Grav CMS. I am thankful to everyone who worked on it and helped me on Discord and Forum. This is my first plugin for grav to show that. I hope it will be useful.
+
+- Special thanks to [pamtbaau](https://github.com/pamtbaau) for their assistance giving code review.
+
 
 ## To Do
 
