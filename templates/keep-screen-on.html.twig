@@ -1,0 +1,219 @@
+
+{% set kso = grav.config.get('plugins.keep-screen-on') %}
+
+{% set hcode1 %}<span class="icon" id="hcode1">{{ kso.icon_1|default("✅") }}</span> {{ kso.text_1|default("Screen is On") }}{% endset %}
+
+{% set hcode2 %}<span class="icon" id="hcode2">{{ kso.icon_2|default("🔒") }}</span> {{ kso.text_2|default("Keep Screen On") }}{% endset %}
+
+{% set hcode3 %}<span class="icon" id="hcode3">{{ kso.icon_3|default("❌") }}</span> {{ kso.text_3|default("Not Supported") }}{% endset %}
+
+
+{% set ksoborrad = kso.border_radius|default("25")|split(' ') %}
+{% set borrad = ksoborrad|map(n => n ~ 'px')|join(' ') %}
+
+
+<div class="screen-wake-container">
+<button class="wake-toggle-btn">
+{{ hcode2 }}
+</button>
+</div>
+
+
+{% style %}
+
+.wake-toggle-btn:has(#hcode1)
+{color:{{ kso.text_color_1 }};background:{{ kso.background_color_1 }};}
+.wake-toggle-btn:has(#hcode1):hover
+{color:{{ kso.text_color_hover_1 }};background:{{ kso.background_color_hover_1 }};}
+
+.wake-toggle-btn:has(#hcode2)
+{color:{{ kso.text_color_2 }};background:{{ kso.background_color_2 }};}
+.wake-toggle-btn:has(#hcode2):hover
+{color:{{ kso.text_color_hover_2 }};background:{{ kso.background_color_hover_2 }};}
+
+.wake-toggle-btn:has(#hcode3)
+{color:{{ kso.text_color_3 }};background:{{ kso.background_color_3 }};}
+.wake-toggle-btn:has(#hcode3):hover
+{color:{{ kso.text_color_hover_3 }};background:{{ kso.background_color_hover_3 }};}
+
+:root {
+  /* Positioning */
+  --screen-wake-bottom: {{ kso.button_margin_vertical|default("20") }}px;
+  --screen-wake-right: {{ kso.button_margin_horizonal|default("20") }}px;
+  --screen-wake-z-index: 100;
+  
+  /* Colors */
+  --primary-color: #2ecc71;
+  --primary-hover: #27ae60;
+  --danger-color: #e74c3c;
+  --danger-hover: #c0392b;
+  --disabled-color: #95a5a6;
+  --text-color: white;
+  
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size: {{ kso.font_size|default("14") }}px;
+  --font-weight: 600;
+  --icon-size: {{ kso.icon_size|default("16") }}px;
+  
+  /* Spacing */
+  --button-padding: 12px 20px;
+  --button-gap: 8px;
+  --button-min-width: {{ kso.min_width|default("140") }}px;
+  
+  /* Border & Shadows */
+  --border-radius: {{ borrad }};
+  --shadow-default: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.2);
+  --shadow-disabled: 0 2px 6px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-duration: 0.3s;
+  --transition-timing: ease;
+  --hover-transform: translateY(-2px);
+}
+
+.screen-wake-container {
+  position: fixed;
+  {{ kso.button_place_vertical|default("bottom") }}: var(--screen-wake-bottom);
+  {{ kso.button_place_horizonal|default("right") }}: var(--screen-wake-right);
+  z-index: var(--screen-wake-z-index);
+  font-family: var(--font-family);
+}
+
+.wake-toggle-btn {
+  padding: var(--button-padding);
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  cursor: pointer;
+  box-shadow: var(--shadow-default);
+  transition: all var(--transition-duration) var(--transition-timing);
+  display: flex;
+  align-items: center;
+  gap: var(--button-gap);
+  min-width: var(--button-min-width);
+  justify-content: center;
+}
+
+.wake-toggle-btn:hover {
+  transform: var(--hover-transform);
+  box-shadow: var(--shadow-hover);
+  background: var(--primary-hover);
+}
+
+.wake-toggle-btn:active {
+  transform: translateY(0);
+}
+
+.wake-toggle-btn.inactive {
+  background: var(--danger-color);
+}
+
+.wake-toggle-btn.inactive:hover {
+  background: var(--danger-hover);
+}
+
+.wake-toggle-btn:disabled {
+  background: var(--disabled-color);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-disabled);
+}
+
+.wake-toggle-btn .icon {
+  font-size: var(--icon-size);
+}
+{% endstyle %}
+{% script %}
+
+// Wait for the DOM to be fully loaded before executing
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the button container and button (they already exist in HTML)
+  const container = document.querySelector('.screen-wake-container');
+  const wakeButton = document.querySelector('.wake-toggle-btn');
+
+  // Wake Lock functionality
+  let wakeLock = null;
+  let isActive = false;
+
+  const updateButtonState = () => {
+    if (isActive) {
+      wakeButton.innerHTML = '{{ hcode1 }}';
+      wakeButton.classList.remove('inactive');
+    } else {
+      wakeButton.innerHTML = '{{ hcode2 }}';
+      wakeButton.classList.add('inactive');
+    }
+  };
+
+  const requestWakeLock = async () => {
+    try {
+      if (!('wakeLock' in navigator)) {
+        throw new Error('Wake Lock API not supported');
+      }
+
+      wakeLock = await navigator.wakeLock.request('screen');
+      isActive = true;
+      updateButtonState();
+
+      wakeLock.addEventListener('release', () => {
+        isActive = false;
+        updateButtonState();
+      });
+
+      // Handle visibility change
+      document.addEventListener('visibilitychange', async () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') {
+          try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            isActive = true;
+            updateButtonState();
+          } catch (err) {
+            console.error('Error reacquiring wake lock:', err);
+            isActive = false;
+            updateButtonState();
+          }
+        }
+      });
+
+    } catch (err) {
+      console.error('Error requesting wake lock:', err);
+      wakeButton.innerHTML = '{{ hcode3 }}';
+      wakeButton.disabled = true;
+      isActive = false;
+    }
+  };
+
+  const releaseWakeLock = () => {
+    if (wakeLock) {
+      wakeLock.release();
+      wakeLock = null;
+    }
+    isActive = false;
+    updateButtonState();
+  };
+
+  // Toggle functionality
+  wakeButton.addEventListener('click', () => {
+    if (isActive) {
+      releaseWakeLock();
+    } else {
+      requestWakeLock();
+    }
+  });
+
+  // Initial state
+  updateButtonState();
+
+  // Cleanup when page is unloaded
+  window.addEventListener('beforeunload', () => {
+    if (wakeLock) {
+      wakeLock.release();
+    }
+  });
+});
+{% endscript %}

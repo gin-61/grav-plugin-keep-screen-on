@@ -1,0 +1,138 @@
+name: Keep Screen On
+slug: keep-screen-on
+type: plugin
+version: 0.1.0
+description: This plugin is to keep screen on for users who may be busy to do things they read on page or for some other reason and want not to leave page.
+icon: plug
+author:
+  name: Gin
+  email: t.b.s@outlook.com
+homepage: https://github.com/gin/grav-plugin-keep-screen-on
+demo: http://demo.yoursite.com
+keywords: grav, plugin, etc
+bugs: https://github.com/gin/grav-plugin-keep-screen-on/issues
+docs: https://github.com/gin/grav-plugin-keep-screen-on/blob/develop/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: ">=1.6.0" }
+
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    text_1:
+      type: text
+      size: small
+      label: You can change text "Keep Screen On"
+    icon_1:
+      type: text
+      size: small
+      label: You can change icon near "Keep Screen On"
+    text_color_1:
+      type: colorpicker
+      label: Text color of "Keep Screen On"
+    background_color_1:
+      type: colorpicker
+      label: Background color of "Keep Screen On"
+    text_color_hover_1:
+      type: colorpicker
+      label: Text color of on hover "Keep Screen On"
+    background_color_hover_1:
+      type: colorpicker
+      label: Background color on hover of "Keep Screen On"
+    text_2:
+      type: text
+      size: small
+      label: You can change text "Screen is On"
+    icon_2:
+      type: text
+      size: small
+      label: You can change icon near "Screen is On"
+    text_color_2:
+      type: colorpicker
+      label: Text color of "Screen is On"
+    background_color_2:
+      type: colorpicker
+      label: Background color of "Screen is On"
+    text_color_hover_2:
+      type: colorpicker
+      label: Text color of on hover "Screen is On"
+    background_color_hover_2:
+      type: colorpicker
+      label: Background color on hover of "Screen is On"
+    text_3:
+      type: text
+      size: small
+      label: You can change error text "Not Supported"
+    icon_3:
+      type: text
+      size: small
+      label: You can change icon near error "Not Supported"
+    text_color_3:
+      type: colorpicker
+      label: Text color of "Not Supported"
+    background_color_3:
+      type: colorpicker
+      label: Background color of "Not Supported"
+    text_color_hover_3:
+      type: colorpicker
+      label: Text color of on hover "Not Supported"
+    background_color_hover_3:
+      type: colorpicker
+      label: Background color on hover of "Not Supported"
+    button_place_horizonal:
+      type: radio
+      label: Button place on page - horizonal
+      default: right
+      options:
+        left: Left
+        right: Right
+
+    button_place_vertical:
+      type: radio
+      label: Button place on page - vertical
+      default: bottom
+      options:
+        bottom: Bottom
+        top: Top
+
+    button_margin_horizonal:
+      type: number
+      size: small
+      label: Button margin horizonal
+
+    button_margin_vertical:
+      type: number
+      size: small
+      label: Button margin vertical
+
+    border_radius:
+      type: text
+      size: medium
+      label: Border radius. you can put a number here or look help button for examples
+      help: Example1:13 Example2:25 11 Example3:36 11 24 Example4:18 21 0 4 so leave a space between each number. Those numbers decide border radius. You can try them as you want to see effects, it is not dangerous^^.
+
+    min_width:
+      type: number
+      size: small
+      label: Button min width
+
+    font_size:
+      type: number
+      size: small
+      label: Font size
+
+    icon_size:
+      type: number
+      size: small
+      label: Icon size
