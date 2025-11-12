@@ -1,6 +1,5 @@
 # Keep Screen On Plugin
 
-**This README.md file should be modified to describe the features, installation, configuration, and general usage of the plugin.**
 
 The **Keep Screen On** Plugin is an extension for [Grav CMS](https://github.com/getgrav/grav). This plugin is to keep screen on for users who may be busy while doing things they read on page or for some other reason like cooking and want not to leave page.
 
@@ -44,13 +43,14 @@ Note that if you use the Admin Plugin, a file with your configuration named keep
 
 ## Usage
 
-**Describe how to use the plugin.**
+At plugin settings there are many fields that effect how button looks.
+Those can be edited to change default settings of the button.
 
 ## Credits
 
-**Did you incorporate third-party code? Want to thank somebody?**
+I like Grav CMS. I am thankful to everyone who worked on it and helped me on Discord and Forum. This is my first plugin for grav to show that. I hope it will be useful.
 
 ## To Do
 
-- [ ] Future plans, if any
+- [ ] Actually it does what it is created for but if there is a bug lets find it^^.
 
