@@ -33,10 +33,12 @@ form:
     text_1:
       type: text
       size: small
+      default: Screen is On
       label: You can change text "Keep Screen On"
     icon_1:
       type: text
       size: small
+      default: ✅
       label: You can change icon near "Keep Screen On"
     text_color_1:
       type: colorpicker
@@ -53,10 +55,12 @@ form:
     text_2:
       type: text
       size: small
+      default: Keep Screen On
       label: You can change text "Screen is On"
     icon_2:
       type: text
       size: small
+      default: 🔒
       label: You can change icon near "Screen is On"
     text_color_2:
       type: colorpicker
@@ -73,10 +77,12 @@ form:
     text_3:
       type: text
       size: small
+      default: Not Supported
       label: You can change error text "Not Supported"
     icon_3:
       type: text
       size: small
+      default: ❌
       label: You can change icon near error "Not Supported"
     text_color_3:
       type: colorpicker
@@ -90,6 +96,7 @@ form:
     background_color_hover_3:
       type: colorpicker
       label: Background color on hover of "Not Supported"
+
     button_place_horizonal:
       type: radio
       label: Button place on page - horizonal
@@ -109,30 +116,36 @@ form:
     button_margin_horizonal:
       type: number
       size: small
+      default: "20"
       label: Button margin horizonal
 
     button_margin_vertical:
       type: number
       size: small
+      default: "20"
       label: Button margin vertical
 
     border_radius:
       type: text
       size: medium
+      default: "25"
       label: Border radius. you can put a number here or look help button for examples
       help: Example1:13 Example2:25 11 Example3:36 11 24 Example4:18 21 0 4 so leave a space between each number. Those numbers decide border radius. You can try them as you want to see effects, it is not dangerous^^.
 
     min_width:
       type: number
       size: small
+      default: "140"
       label: Button min width
 
     font_size:
       type: number
       size: small
+      default: "14"
       label: Font size
 
     icon_size:
       type: number
       size: small
+      default: "16"
       label: Icon size

@@ -42,6 +42,7 @@ enabled: true
 Note that if you use the Admin Plugin, a file with your configuration named keep-screen-on.yaml will be saved in the `user/config/plugins/`-folder once the configuration is saved in the Admin.
 
 ## Usage
+[keep-screen-on] shortcode can be added to pages (md file) to show the button which works for switching modes.
 
 At plugin settings there are many fields that effect how button looks.
 Those can be edited to change default settings of the button.
