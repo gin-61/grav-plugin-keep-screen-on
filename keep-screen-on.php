@@ -44,11 +44,19 @@ class KeepScreenOnPlugin extends Plugin
 
         // Enable the main events we are interested in
         $this->enable([
+    'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
             'onTwigInitialized' => ['onTwigInitialized', 0],
-            'onPageContentRaw' => ['onPageContentRaw', 0],
+            'onPageContent' => ['onPageContent', 0],
         ]);
     }
+
+public function onTwigSiteVariables()
+{
+    $twig = $this->grav['twig'];
+    $twig->twig_vars['page'] = $this->grav['page'];
+    $twig->twig_vars['uri'] = $this->grav['uri'];
+}
 
     /**
      * Add plugin templates path
@@ -56,6 +64,7 @@ class KeepScreenOnPlugin extends Plugin
     public function onTwigTemplatePaths()
     {
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
+
     }
 
     /**
@@ -65,51 +74,51 @@ class KeepScreenOnPlugin extends Plugin
     {
         $twig = $this->grav['twig'];
         
-        // Add twig function for manual inclusion
+        // Add twig function for manual inclusion (optional)
         $twig->twig->addFunction(
             new \Twig\TwigFunction('keepScreenOn', [$this, 'renderKeepScreenOn'], ['is_safe' => ['html']])
         );
     }
 
     /**
-     * Process page content to handle shortcodes
+     * Inject keep screen on content to ALL pages
      */
-    public function onPageContentRaw()
+    public function onPageContent()
     {
         $page = $this->grav['page'];
         $config = $this->mergeConfig($page);
         
-        if ($config->get('enabled')) {
-            $rawContent = $page->getRawContent();
+        // Check if plugin is enabled for this page (you can add config logic here)
+        if ($this->shouldIncludeOnPage($page)) {
+            // Get the rendered content
+            $content = $page->getRawContent();
             
-            // Simple shortcode replacement
-            if (preg_match('/\[keep-screen-on(?:\s+([^\]]+))?\]/i', $rawContent)) {
-                $content = $this->processKeepScreenOnShortcode($rawContent);
-                $page->setRawContent($content);
-            }
+            // Inject the keep screen on HTML
+            $keepScreenOnHtml = $this->renderKeepScreenOn();
+            
+            // Add to the page content (you can choose where to inject it)
+            // Option 1: Add to beginning
+            // $page->setRawContent($keepScreenOnHtml . $content);
+            
+            // Option 2: Add to end (recommended)
+            $page->setRawContent($content . $keepScreenOnHtml);
         }
     }
 
     /**
-     * Process keep-screen-on shortcode
+     * Determine if the plugin should be included on this page
+     * You can add custom logic here to exclude certain pages
      */
-    private function processKeepScreenOnShortcode($content)
+    private function shouldIncludeOnPage($page): bool
     {
-        $pattern = '/\[keep-screen-on(?:\s+([^\]]+))?\]/i';
+        $config = $this->config->get('plugins.keep-screen-on');
         
-        return preg_replace_callback($pattern, function($matches) {
-            $params = [];
-            
-            // Simple enabled/disabled parsing
-            if (isset($matches[1])) {
-                $paramString = trim($matches[1]);
-                if (in_array(strtolower($paramString), ['false', '0', 'no', 'off', 'disable'])) {
-                    $params['enabled'] = false;
-                }
-            }
-            
-            return $this->renderKeepScreenOn($params);
-        }, $content);
+        // Check if plugin is globally enabled
+        if (isset($config['enabled']) && !$config['enabled']) {
+            return false;
+        }
+        
+        return true;
     }
 
     /**
@@ -121,13 +130,42 @@ class KeepScreenOnPlugin extends Plugin
         
         // Merge default config with any passed parameters
         $data = array_merge([
-            'enabled' => $config['enabled'] ?? true
+            'enabled' => true
         ], $params);
 
+        // Get the full absolute URL of the current page
+        $page = $this->grav['page'];
+        $absoluteUrl = $this->getAbsoluteUrl($page->url(true));
+
         try {
-            return $this->grav['twig']->twig()->render('keep-screen-on.html.twig', $data);
+            return $this->grav['twig']->twig()->render('keep-screen-on.html.twig', [
+                'kso' => $config,
+                'enabled' => $data['enabled'],
+                'page_absolute_url' => $absoluteUrl,
+            ]);
         } catch (\Exception $e) {
             return '<!-- Keep Screen On Error: ' . $e->getMessage() . ' -->';
         }
+    }
+
+    /**
+     * Get absolute URL with proper scheme and domain
+     */
+    private function getAbsoluteUrl($relativeUrl): string
+    {
+        $uri = $this->grav['uri'];
+        $baseUrl = $this->grav['base_url_absolute'];
+        
+        // If it's already an absolute URL, return as is
+        if (parse_url($relativeUrl, PHP_URL_SCHEME)) {
+            return $relativeUrl;
+        }
+        
+        // Build the absolute URL
+        $scheme = $uri->scheme(true) ?: 'http';
+        $host = $uri->host();
+        $port = $uri->port() ? ':' . $uri->port() : '';
+        
+        return $scheme . '://' . $host . $port . $relativeUrl;
     }
 }

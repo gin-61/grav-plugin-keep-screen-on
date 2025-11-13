@@ -28,7 +28,7 @@ Note that if you use the Admin Plugin, a file with your configuration named keep
 
 
 ## Usage
-[keep-screen-on] shortcode can be added to content section in pages on admin plugin or to md file to show the button which works for switching modes.
+First thing to do is adding button to pages that we want it to be shown. That can be done easy by using the first field on plugin's settings which created to configure where to add button based on page's adress. For more information, that setting can be seen. After that, button will be seen on choosen pages with default settings, nothing more is needed to make it work.
 
 
 ## Credits
@@ -40,8 +40,9 @@ I like Grav CMS. I am thankful to everyone who worked on it and helped me on Dis
 
 ## To Do
 
+- [x] Test at Linux OS
 - [ ] Test at Windows OS
-- [ ] Test at Iphone
 - [ ] Test at Mac OS
+- [x] Test at Android
+- [x] Test at Iphone
 - [ ] Make php code better
-- [ ] Try twig shortcode

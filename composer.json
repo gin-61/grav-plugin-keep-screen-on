@@ -1,9 +1,10 @@
 {
-  "name": "gin/keep-screen-on",
+  "name": "gin-61/keep-screen-on",
+  "version": "1.0.0",
   "type": "grav-plugin",
   "description": "This plugin is to keep screen on for users who may be busy to do things they read on page or for some other reason and want not to leave page.",
   "keywords": ["plugin"],
-  "homepage": "https://github.com/gin/grav-plugin-keep-screen-on",
+  "homepage": "https://github.com/gin-61/grav-plugin-keep-screen-on",
   "license": "MIT",
   "authors": [
     {
@@ -19,6 +20,6 @@
     "psr-4": {
       "Grav\\Plugin\\KeepScreenOn\\": "classes/"
     },
-    "classmap":  ["keep-screen-on.php"]
+    "classmap": ["keep-screen-on.php"]
   }
 }
