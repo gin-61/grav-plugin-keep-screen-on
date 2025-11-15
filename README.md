@@ -11,7 +11,7 @@ The **Keep Screen On** Plugin is an extension for [Grav CMS](https://github.com/
 
 ### Manual Installation
 
-To install the plugin manually, download the zip-version of this repository and unzip it under `/your/site/grav/user/plugins`. Then rename the folder to `keep-screen-on`. You can find these files on [GitHub](https://github.com//grav-plugin-keep-screen-on) or via [GetGrav.org](https://getgrav.org/downloads/plugins).
+To install the plugin manually, download the zip-version of this repository and unzip it under `/your/site/grav/user/plugins`. Then rename the folder to `keep-screen-on`. You can find these files on [GitHub](https://github.com//grav-plugin-keep-screen-on).
 
 You should now have all the plugin files under
 
