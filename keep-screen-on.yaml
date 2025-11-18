@@ -1,1 +1,30 @@
 enabled: true
+page_list:
+  - page_url: ".com"
+z_index: 100
+text_1: "Screen is On"
+icon_1: "✅"
+text_color_1: ""
+background_color_1: ""
+text_color_hover_1: ""
+background_color_hover_1: ""
+text_2: "Keep Screen On"
+icon_2: "🔒"
+text_color_2: ""
+background_color_2: ""
+text_color_hover_2: ""
+background_color_hover_2: ""
+text_3: "Not Supported"
+icon_3: "❌"
+text_color_3: ""
+background_color_3: ""
+text_color_hover_3: ""
+background_color_hover_3: ""
+button_place_horizonal: right
+button_place_vertical: bottom
+button_margin_horizonal: 20
+button_margin_vertical: 20
+border_radius: "25"
+min_width: 140
+font_size: 14
+icon_size: 16
