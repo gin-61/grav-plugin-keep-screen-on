@@ -15,7 +15,7 @@ docs: https://github.com/gin-61/grav-plugin-keep-screen-on/blob/develop/README.m
 license: MIT
 
 dependencies:
-  - { name: grav, version: ">=1.6.0" }
+  - { name: grav, version: ">=1.7.0" }
 
 form:
   validation: loose
@@ -33,8 +33,8 @@ form:
 
     page_list:
       type: list
-      label: "Button will be added to all pages whose have this text in their url. For more info look at help."
-      help: "If button is wanted to be at all pages (.com) is good enough because all pages will have it unless it is (.net) or (.org). if button is wanted under one url only it can be writen here like (example.com/asf/fasd/fa) or if button is wanted under a page group, it can be written here like (/white-animals/)"
+      label: PLUGIN_KEEP_SCREEN_ON.PAGE_LIST
+      help: PLUGIN_KEEP_SCREEN_ON.PAGE_LIST_HELP
       fields:
         .page_url:
           type: text
@@ -42,8 +42,8 @@ form:
 
     z_index:
       type: number
-      label: "This determines the stacking order of elements on a webpage, with higher values appearing in front of lower values."
-      help: "Imagine you have multiple layers of transparent paper stacked on top of each other. Each piece of paper represents an HTML element, and the z-index value determines the order in which they are stacked. If button cant be seen because something is on it you can increase number or if you dont want to see button when another element appears you can decrease this number."
+      label: PLUGIN_KEEP_SCREEN_ON.Z_INDEX
+      help: PLUGIN_KEEP_SCREEN_ON.Z_INDEX_HELP
       default: "100"
       size: small
 
@@ -51,135 +51,135 @@ form:
       type: text
       size: small
       default: Screen is On
-      label: You can change text "Keep Screen On"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_1
 
     icon_1:
       type: text
       size: small
       default: ✅
-      label: You can change icon near "Keep Screen On"
+      label: PLUGIN_KEEP_SCREEN_ON.ICON_1
 
     text_color_1:
       type: colorpicker
-      label: Text color of "Keep Screen On"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_COLOR_1
 
     background_color_1:
       type: colorpicker
-      label: Background color of "Keep Screen On"
+      label: PLUGIN_KEEP_SCREEN_ON.BACKGROUND_COLOR_1
 
     text_color_hover_1:
       type: colorpicker
-      label: Text color of on hover "Keep Screen On"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_COLOR_HOVER_1
 
     background_color_hover_1:
       type: colorpicker
-      label: Background color on hover of "Keep Screen On"
+      label: PLUGIN_KEEP_SCREEN_ON.BACKGROUND_COLOR_HOVER_1
 
     text_2:
       type: text
       size: small
       default: Keep Screen On
-      label: You can change text "Screen is On"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_2
 
     icon_2:
       type: text
       size: small
       default: 🔒
-      label: You can change icon near "Screen is On"
+      label: PLUGIN_KEEP_SCREEN_ON.ICON_2
 
     text_color_2:
       type: colorpicker
-      label: Text color of "Screen is On"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_COLOR_2
 
     background_color_2:
       type: colorpicker
-      label: Background color of "Screen is On"
+      label: PLUGIN_KEEP_SCREEN_ON.BACKGROUND_COLOR_2
 
     text_color_hover_2:
       type: colorpicker
-      label: Text color of on hover "Screen is On"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_COLOR_HOVER_2
 
     background_color_hover_2:
       type: colorpicker
-      label: Background color on hover of "Screen is On"
+      label: PLUGIN_KEEP_SCREEN_ON.BACKGROUND_COLOR_HOVER_2
 
     text_3:
       type: text
       size: small
       default: Not Supported
-      label: You can change error text "Not Supported"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_3
 
     icon_3:
       type: text
       size: small
       default: ❌
-      label: You can change icon near error "Not Supported"
+      label: PLUGIN_KEEP_SCREEN_ON.ICON_3
 
     text_color_3:
       type: colorpicker
-      label: Text color of "Not Supported"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_COLOR_3
 
     background_color_3:
       type: colorpicker
-      label: Background color of "Not Supported"
+      label: PLUGIN_KEEP_SCREEN_ON.BACKGROUND_COLOR_3
 
     text_color_hover_3:
       type: colorpicker
-      label: Text color of on hover "Not Supported"
+      label: PLUGIN_KEEP_SCREEN_ON.TEXT_COLOR_HOVER_3
 
     background_color_hover_3:
       type: colorpicker
-      label: Background color on hover of "Not Supported"
+      label: PLUGIN_KEEP_SCREEN_ON.BACKGROUND_COLOR_HOVER_3
 
     button_place_horizonal:
       type: radio
-      label: Button place on page - horizonal
+      label: PLUGIN_KEEP_SCREEN_ON.BUTTON_PLACE_HORIZONTAL
       default: right
       options:
-        left: Left
-        right: Right
+        left: PLUGIN_KEEP_SCREEN_ON.SIDE_OPTIONS.LEFT
+        right: PLUGIN_KEEP_SCREEN_ON.SIDE_OPTIONS.RIGHT
 
     button_place_vertical:
       type: radio
-      label: Button place on page - vertical
+      label: PLUGIN_KEEP_SCREEN_ON.BUTTON_PLACE_VERTICAL
       default: bottom
       options:
-        bottom: Bottom
-        top: Top
+        bottom: PLUGIN_KEEP_SCREEN_ON.SIDE_OPTIONS.BOTTOM
+        top: PLUGIN_KEEP_SCREEN_ON.SIDE_OPTIONS.TOP
 
     button_margin_horizonal:
       type: number
       size: small
       default: "20"
-      label: Button margin horizonal
+      label: PLUGIN_KEEP_SCREEN_ON.BUTTON_MARGIN_HORIZONTAL
 
     button_margin_vertical:
       type: number
       size: small
       default: "20"
-      label: Button margin vertical
+      label: PLUGIN_KEEP_SCREEN_ON.BUTTON_MARGIN_VERTICAL
 
     border_radius:
       type: text
       size: medium
       default: "25"
-      label: Border radius. you can put a number here or look help button for examples
-      help: Example1:13 Example2:25 11 Example3:36 11 24 Example4:18 21 0 4 so leave a space between each number. Those numbers decide border radius. You can try them as you want to see effects, it is not dangerous^^.
+      label: PLUGIN_KEEP_SCREEN_ON.BORDER_RADIUS
+      help: PLUGIN_KEEP_SCREEN_ON.BORDER_RADIUS_HELP
 
     min_width:
       type: number
       size: small
       default: "140"
-      label: Button min width
+      label: PLUGIN_KEEP_SCREEN_ON.MIN_WIDTH
 
     font_size:
       type: number
       size: small
       default: "14"
-      label: Font size
+      label: PLUGIN_KEEP_SCREEN_ON.FONT_SIZE
 
     icon_size:
       type: number
       size: small
       default: "16"
-      label: Icon size
+      label: PLUGIN_KEEP_SCREEN_ON.ICON_SIZE
