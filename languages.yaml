@@ -1,4 +1,38 @@
 en:
   PLUGIN_KEEP_SCREEN_ON:
-    TEXT_VARIABLE: Text Variable
-    TEXT_VARIABLE_HELP: Text to add to the top of a page
+    PAGE_LIST: "Button will be added to all pages whose have this text in their url. For more info look at help."
+    PAGE_LIST_HELP: "If button is wanted to be at all pages (.com) is good enough because all pages will have it unless it is (.net) or (.org). if button is wanted under one url only it can be writen here like (example.com/asf/fasd/fa) or if button is wanted under a page group, it can be written here like (/white-animals/)"
+    Z_INDEX: "This determines the stacking order of elements on a webpage, with higher values appearing in front of lower values."
+    Z_INDEX_HELP: "Imagine you have multiple layers of transparent paper stacked on top of each other. Each piece of paper represents an HTML element, and the z-index value determines the order in which they are stacked. If button cant be seen because something is on it you can increase number or if you dont want to see button when another element appears you can decrease this number."
+    TEXT_1: 'You can change text "Keep Screen On"'
+    ICON_1: 'You can change icon near "Keep Screen On"'
+    TEXT_COLOR_1: 'Text color of "Keep Screen On"'
+    BACKGROUND_COLOR_1: 'Background color of "Keep Screen On"'
+    TEXT_COLOR_HOVER_1: 'Text color of on hover "Keep Screen On"'
+    BACKGROUND_COLOR_HOVER_1: 'Background color on hover of "Keep Screen On"'
+    TEXT_2: 'You can change text "Screen is On"'
+    ICON_2: 'You can change icon near "Screen is On"'
+    TEXT_COLOR_2: 'Text color of "Screen is On"'
+    BACKGROUND_COLOR_2: 'Background color of "Screen is On"'
+    TEXT_COLOR_HOVER_2: 'Text color of on hover "Screen is On"'
+    BACKGROUND_COLOR_HOVER_2: 'Background color on hover of "Screen is On"'
+    TEXT_3: 'You can change error text "Not Supported"'
+    ICON_3: 'You can change icon near error "Not Supported"'
+    TEXT_COLOR_3: 'Text color of "Not Supported"'
+    BACKGROUND_COLOR_3: 'Background color of "Not Supported"'
+    TEXT_COLOR_HOVER_3: 'Text color of on hover "Not Supported"'
+    BACKGROUND_COLOR_HOVER_3: 'Background color on hover of "Not Supported"'
+    BUTTON_PLACE_HORIZONTAL: "Button place on page - horizontal"
+    BUTTON_PLACE_VERTICAL: "Button place on page - vertical"
+    BUTTON_MARGIN_HORIZONTAL: "Button margin horizontal"
+    BUTTON_MARGIN_VERTICAL: "Button margin vertical"
+    BORDER_RADIUS: "Border radius. you can put a number here or look help button for examples"
+    BORDER_RADIUS_HELP: "Example1:13 Example2:25 11 Example3:36 11 24 Example4:18 21 0 4 so leave a space between each number. Those numbers decide border radius. You can try them as you want to see effects, it is not dangerous^^."
+    MIN_WIDTH: "Button min width"
+    FONT_SIZE: "Font size"
+    ICON_SIZE: "Icon size"
+    SIDE_OPTIONS:
+      LEFT: Left
+      RIGHT: Right
+      BOTTOM: Bottom
+      TOP: Top
