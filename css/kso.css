@@ -1,0 +1,75 @@
+#screen_wake_container {
+  position: fixed;
+  bottom: var(--button-margin-bottom);
+  right: var(--button-margin-right);
+  top: var(--button-place-top);
+  left: var(--button-place-left);
+  z-index: var(--z-index);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+#wake_toggle_btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: var(--min-width);
+  justify-content: center;
+}
+
+#wake_toggle_btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+#wake_toggle_btn:active {
+  transform: translateY(0);
+}
+
+#wake_toggle_btn:disabled {
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#wake_toggle_btn .icon {
+  font-size: var(--icon-size);
+}
+
+/* State 1: Active */
+#wake_toggle_btn:has(#hcode1) {
+  color: var(--text-color-1);
+  background: var(--background-color-1);
+}
+#wake_toggle_btn:has(#hcode1):hover {
+  color: var(--text-color-hover-1);
+  background: var(--background-color-hover-1);
+}
+
+/* State 2: Inactive */
+#wake_toggle_btn:has(#hcode2) {
+  color: var(--text-color-2);
+  background: var(--background-color-2);
+}
+#wake_toggle_btn:has(#hcode2):hover {
+  color: var(--text-color-hover-2);
+  background: var(--background-color-hover-2);
+}
+
+/* State 3: Not Supported */
+#wake_toggle_btn:has(#hcode3) {
+  color: var(--text-color-3);
+  background: var(--background-color-3);
+}
+#wake_toggle_btn:has(#hcode3):hover {
+  color: var(--text-color-hover-3);
+  background: var(--background-color-hover-3);
+}
