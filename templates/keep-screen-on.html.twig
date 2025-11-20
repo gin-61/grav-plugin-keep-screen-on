@@ -1,8 +1,5 @@
-
-
 {% for p in kso.page_list %}
 {% if page_absolute_url|contains(p.page_url) %}
-
 
 {% set hcode1 %}<span class="icon" id="hcode1">{{ kso.icon_1|default("✅") }}</span> {{ kso.text_1|default("Screen is On") }}{% endset %}
 {% set hcode2 %}<span class="icon" id="hcode2">{{ kso.icon_2|default("🔒") }}</span> {{ kso.text_2|default("Keep Screen On") }}{% endset %}
@@ -11,176 +8,54 @@
 {% set ksoborrad = kso.border_radius|default("25")|split(' ') %}
 {% set borrad = ksoborrad|map(n => n ~ 'px')|join(' ') %}
 
-<div id="screen_wake_container">
+<div id="screen_wake_container" data-hcode1="{{ hcode1|e }}" data-hcode2="{{ hcode2|e }}" data-hcode3="{{ hcode3|e }}">
     <button id="wake_toggle_btn">
         {{ hcode2 }}
     </button>
 </div>
 
+{% set kso_top = kso.button_place_vertical == 'top' ? kso.button_margin_vertical|default('20') ~ 'px' : '' %}
+{% set kso_bottom = kso.button_place_vertical == 'bottom' ? kso.button_margin_vertical|default('20') ~ 'px' : '' %}
+
+{% set kso_left = kso.button_place_horizonal == 'left' ? kso.button_margin_horizonal|default('20') ~ 'px' : '' %}
+{% set kso_right = kso.button_place_horizonal == 'right' ? kso.button_margin_horizonal|default('20') ~ 'px' : '' %}
+
 {% style %}
 
-#screen_wake_container {
-    position: fixed;
-    {{ kso.button_place_vertical|default('bottom') }}: {{ kso.button_margin_vertical|default('20') }}px;
-    {{ kso.button_place_horizonal|default('right') }}: {{ kso.button_margin_horizonal|default('20') }}px;
-    z-index: {{ kso.z_index|default('100') }};
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+:root {
+    /* Positioning */
+    --button-margin-right: {{ kso_right }};
+    --button-margin-left: {{ kso_left }};
+    --button-margin-bottom: {{ kso_bottom }};
+    --button-margin-top: {{ kso_top }};
+    
+    /* Sizing */
+    --min-width: {{ kso.min_width|default('140') }}px;
+    --font-size: {{ kso.font_size|default('14') }}px;
+    --icon-size: {{ kso.icon_size|default('16') }}px;
+    --border-radius: {{ borrad }};
+    --z-index: {{ kso.z_index|default('100') }};
+    
+    /* State 1 Colors */
+    --text-color-1: {{ kso.text_color_1|default('white') }};
+    --background-color-1: {{ kso.background_color_1|default('#2ecc71') }};
+    --text-color-hover-1: {{ kso.text_color_hover_1|default('white') }};
+    --background-color-hover-1: {{ kso.background_color_hover_1|default('#27ae60') }};
+    
+    /* State 2 Colors */
+    --text-color-2: {{ kso.text_color_2|default('white') }};
+    --background-color-2: {{ kso.background_color_2|default('#e74c3c') }};
+    --text-color-hover-2: {{ kso.text_color_hover_2|default('white') }};
+    --background-color-hover-2: {{ kso.background_color_hover_2|default('#c0392b') }};
+    
+    /* State 3 Colors */
+    --text-color-3: {{ kso.text_color_3|default('white') }};
+    --background-color-3: {{ kso.background_color_3|default('#95a5a6') }};
+    --text-color-hover-3: {{ kso.text_color_hover_3|default('white') }};
+    --background-color-hover-3: {{ kso.background_color_hover_3|default('#7f8c8d') }};
 }
 
-#wake_toggle_btn {
-    padding: 12px 20px;
-    border: none;
-    border-radius: {{ borrad }};
-    font-size: {{ kso.font_size|default('14') }}px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: {{ kso.min_width|default('140') }}px;
-    justify-content: center;
-}
-
-#wake_toggle_btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-#wake_toggle_btn:active {
-    transform: translateY(0);
-}
-
-#wake_toggle_btn:disabled {
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-#wake_toggle_btn .icon {
-    font-size: {{ kso.icon_size|default('16') }}px;
-}
-
-/* State 1: Active */
-#wake_toggle_btn:has(#hcode1) {
-    color: {{ kso.text_color_1|default('white') }};
-    background: {{ kso.background_color_1|default('#2ecc71') }};
-}
-#wake_toggle_btn:has(#hcode1):hover {
-    color: {{ kso.text_color_hover_1|default('white') }};
-    background: {{ kso.background_color_hover_1|default('#27ae60') }};
-}
-
-/* State 2: Inactive */
-#wake_toggle_btn:has(#hcode2) {
-    color: {{ kso.text_color_2|default('white') }};
-    background: {{ kso.background_color_2|default('#e74c3c') }};
-}
-#wake_toggle_btn:has(#hcode2):hover {
-    color: {{ kso.text_color_hover_2|default('white') }};
-    background: {{ kso.background_color_hover_2|default('#c0392b') }};
-}
-
-/* State 3: Not Supported */
-#wake_toggle_btn:has(#hcode3) {
-    color: {{ kso.text_color_3|default('white') }};
-    background: {{ kso.background_color_3|default('#95a5a6') }};
-}
-#wake_toggle_btn:has(#hcode3):hover {
-    color: {{ kso.text_color_hover_3|default('white') }};
-    background: {{ kso.background_color_hover_3|default('#7f8c8d') }};
-}
 {% endstyle %}
 
-{% script %}
-
-// Wait for the DOM to be fully loaded before executing
-document.addEventListener('DOMContentLoaded', function() {
-  // Get the button container and button (they already exist in HTML)
-  const container = document.querySelector('#screen_wake_container');
-  const wakeButton = document.querySelector('#wake_toggle_btn');
-
-  // Wake Lock functionality
-  let wakeLock = null;
-  let isActive = false;
-
-  const updateButtonState = () => {
-    if (isActive) {
-      wakeButton.innerHTML = '{{ hcode1 }}';
-      wakeButton.classList.remove('inactive');
-    } else {
-      wakeButton.innerHTML = '{{ hcode2 }}';
-      wakeButton.classList.add('inactive');
-    }
-  };
-
-  const requestWakeLock = async () => {
-    try {
-      if (!('wakeLock' in navigator)) {
-        throw new Error('Wake Lock API not supported');
-      }
-
-      wakeLock = await navigator.wakeLock.request('screen');
-      isActive = true;
-      updateButtonState();
-
-      wakeLock.addEventListener('release', () => {
-        isActive = false;
-        updateButtonState();
-      });
-
-      // Handle visibility change
-      document.addEventListener('visibilitychange', async () => {
-        if (wakeLock !== null && document.visibilityState === 'visible') {
-          try {
-            wakeLock = await navigator.wakeLock.request('screen');
-            isActive = true;
-            updateButtonState();
-          } catch (err) {
-            console.error('Error reacquiring wake lock:', err);
-            isActive = false;
-            updateButtonState();
-          }
-        }
-      });
-
-    } catch (err) {
-      console.error('Error requesting wake lock:', err);
-      wakeButton.innerHTML = '{{ hcode3 }}';
-      wakeButton.disabled = true;
-      isActive = false;
-    }
-  };
-
-  const releaseWakeLock = () => {
-    if (wakeLock) {
-      wakeLock.release();
-      wakeLock = null;
-    }
-    isActive = false;
-    updateButtonState();
-  };
-
-  // Toggle functionality
-  wakeButton.addEventListener('click', () => {
-    if (isActive) {
-      releaseWakeLock();
-    } else {
-      requestWakeLock();
-    }
-  });
-
-  // Initial state
-  updateButtonState();
-
-  // Cleanup when page is unloaded
-  window.addEventListener('beforeunload', () => {
-    if (wakeLock) {
-      wakeLock.release();
-    }
-  });
-});
-{% endscript %}
 {% endif %}
 {% endfor %}
